@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-test-app-ingress
+  namespace: security-lab
+spec:
+  podSelector:
+    matchLabels:
+      app: test-app
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          access: allowed
+    ports:
+    - protocol: TCP
+      port: 80
